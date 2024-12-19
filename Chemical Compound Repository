@@ -1,0 +1,39 @@
+-- Data Model for a Chemical Compound Repository
+
+-- Table for storing basic information about compounds
+CREATE TABLE Compounds (
+    id SERIAL PRIMARY KEY,                 -- Unique identifier for each compound
+    iupac_name TEXT NOT NULL,              -- IUPAC name of the compound
+    common_name TEXT,                      -- Common name of the compound
+    cas_number TEXT UNIQUE,                -- CAS number (if available)
+    molecular_formula TEXT NOT NULL,       -- Molecular formula
+    molecular_weight FLOAT                 -- Molecular weight (in g/mol)
+);
+
+-- Table for storing physical and chemical properties of compounds
+CREATE TABLE Properties (
+    id SERIAL PRIMARY KEY,                 -- Unique identifier for each property entry
+    compound_id INT REFERENCES Compounds(id), -- Foreign key referencing Compounds
+    boiling_point FLOAT,                   -- Boiling point (in °C)
+    melting_point FLOAT,                   -- Melting point (in °C)
+    solubility TEXT,                       -- Solubility information (e.g., "water: 10 mg/mL")
+    density FLOAT                          -- Density (in g/cm³)
+);
+
+-- Table for storing molecular structures
+CREATE TABLE Structures (
+    id SERIAL PRIMARY KEY,                 -- Unique identifier for each structure entry
+    compound_id INT REFERENCES Compounds(id), -- Foreign key referencing Compounds
+    smiles TEXT NOT NULL,                  -- SMILES (Simplified Molecular Input Line Entry System) representation
+    inchi TEXT NOT NULL,                   -- InChI (International Chemical Identifier) representation
+    molecular_structure_image BYTEA        -- Binary data or URL for the molecular structure image
+);
+
+-- Example relationships
+-- Compounds.id is the central entity.
+-- Properties and Structures are connected to Compounds via compound_id.
+
+-- Indexing for faster searches
+CREATE INDEX idx_compounds_cas_number ON Compounds(cas_number);
+CREATE INDEX idx_structures_smiles ON Structures(smiles);
+CREATE INDEX idx_properties_boiling_point ON Properties(boiling_point);
