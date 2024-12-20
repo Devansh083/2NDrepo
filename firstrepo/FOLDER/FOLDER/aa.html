@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Reaction Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.5/axios.min.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Chemical Reaction Visualizer</h1>
+    </header>
+    <main>
+        <section id="input-section">
+            <h2>Enter Chemical Substances</h2>
+            <form id="reaction-form">
+                <label for="substance1">Substance 1:</label>
+                <input type="text" id="substance1" name="substance1" placeholder="Enter first chemical (e.g., HCl)" required>
+
+                <label for="substance2">Substance 2:</label>
+                <input type="text" id="substance2" name="substance2" placeholder="Enter second chemical (e.g., NaOH)" required>
+
+                <button type="submit">Show Reaction</button>
+            </form>
+        </section>
+
+        <section id="output-section">
+            <h2>Reaction Details</h2>
+            <div id="reaction-output">
+                <p id="reaction-description">Enter two substances to see their reaction.</p>
+                <div id="reaction-images">
+                    <img id="reactant1-img" alt="Reactant 1 Structure">
+                    <span>+</span>
+                    <img id="reactant2-img" alt="Reactant 2 Structure">
+                    <span>=</span>
+                    <img id="product-img" alt="Product Structure">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Chemical Reaction Visualizer</p>
+    </footer>
+</body>
+</html>
+
+
